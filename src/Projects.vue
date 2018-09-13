@@ -42,6 +42,8 @@ export default {
             title: client.title === project.title ? undefined : client.title,
           },
           link: project.link || this.clients[project.clientId].link,
+          // stack: {},
+          // tools: {},
         };
       }),
     };

@@ -41,6 +41,7 @@ export default {
     clients: { required: true, type: Object },
     employers: { required: true, type: Object },
     projects: { required: true, type: Object },
+    skills: { required: true, type: Object },
   },
   data() {
     return {

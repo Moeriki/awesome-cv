@@ -21,10 +21,23 @@ describe('data', () => {
       it('should have a valid employerId', () => {
         expect(employers).toHaveProperty(project.employerId);
       });
+
+      // TODO enabled
+      xdescribe.each(project.skills)(
+        'should have valid skill id %s',
+        (skillId) => {
+          expect(data.experience.skills).toHaveProperty(skillId);
+        },
+      );
     });
   });
 
   describe('skills', () => {
+    const allProjectSkills = Object.values(projects).reduce(
+      (acc, { skills: projectSkills }) => new Set([...acc, projectSkills]),
+      new Set(),
+    );
+
     describe.each(Object.entries(skills))('%s', (key, skill) => {
       if (skill.legacy === true) {
         it('should have no score', () => {
@@ -48,6 +61,11 @@ describe('data', () => {
 
       it('should not nest more than 2 levels', () => {
         expect(findSkillLevel(skill)).not.toBeGreaterThan(2);
+      });
+
+      // TODO enabled
+      xit('is used in a project', () => {
+        expect(allProjectSkills).toInclude(key);
       });
     });
   });

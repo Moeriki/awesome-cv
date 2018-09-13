@@ -18,6 +18,7 @@
           :clients="experience.clients"
           :employers="experience.employers"
           :projects="experience.projects"
+          :skills="experience.skills"
           aria-labelledby="experience"
           role="main"
         />
