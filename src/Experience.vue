@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { asArray, matchesProperty, newToOld } from './utils';
+import { asArray, mapValues, matchesProperty, newToOld } from './utils';
 import ExternalLink from './components/ExternalLink.vue';
 import Timespan from './components/Timespan.vue';
 import Projects from './Projects.vue';
@@ -51,7 +51,13 @@ export default {
           ...employer,
           projects: asArray(this.projects)
             .filter(matchesProperty('employerId', employer._id))
-            .sort(newToOld),
+            .sort(newToOld)
+            .map((project) => ({
+              ...project,
+              skills: mapValues((_, skillId) =>
+                project.skills.includes(skillId),
+              )(this.skills),
+            })),
         })),
     };
   },

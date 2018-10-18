@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panel>
+  <v-expansion-panel :value="Number(0)">
     <v-expansion-panel-content v-for="project in projectTree" :key="project._id">
       <h6 slot="header" class="title font-weight-light">
         {{ project.title }}
@@ -10,11 +10,20 @@
           :text="project.client.title"
         />
       </h6>
-      <v-card>
-        <v-card-title class="role">
-          <span class="grey--text">{{ project.role }}</span>
-        </v-card-title>
-        <v-card-text>{{ project.description }}</v-card-text>
+      <v-card class="project-detail">
+        <v-layout wrap>
+          <v-flex xs12>{{ project.description }}</v-flex>
+          <v-flex xs12>
+            <strong>Role:</strong>
+            {{ project.role }}
+          </v-flex>
+          <v-flex xs12>
+            <strong>Stack:</strong> …
+          </v-flex>
+          <v-flex xs12>
+            <strong>Tools:</strong> …
+          </v-flex>
+        </v-layout>
       </v-card>
     </v-expansion-panel-content>
   </v-expansion-panel>
@@ -42,11 +51,17 @@ export default {
             title: client.title === project.title ? undefined : client.title,
           },
           link: project.link || this.clients[project.clientId].link,
-          // stack: {},
-          // tools: {},
+          stack: {},
+          tools: {},
         };
       }),
     };
   },
 };
 </script>
+
+<style scoped>
+.project-detail {
+  padding: 12px 24px;
+}
+</style>
